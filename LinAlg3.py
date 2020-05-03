@@ -150,7 +150,7 @@ def t(mat):
 
 #
 ##
-###     check if a matrix is lower triangular
+###     check if a matrix is upper triangular
 ##
 #
 
