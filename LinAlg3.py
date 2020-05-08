@@ -1095,7 +1095,7 @@ for k in range(1,7):
     m = 2**k
     A = HomeworkMatrix(m)
     b = [1 for w in range(A.rows)]
-    data.append( ConjugateGradient2( A, b, naught=[1 for 2 in range(A.cols)])['times'] )
+    data.append( ConjugateGradient2( A, b, naught=[1 for w in range(A.cols)])['times'] )
 
 
 
