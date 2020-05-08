@@ -1048,6 +1048,9 @@ from numpy import matmul as mul
 
 
 def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=0):
+    #
+    #   preamble
+    #
     if naught is None:
         naught = [uniform(lo,hi) for w in range(len(b))]
 #    if isinstance(A, Matrix):       # optional
@@ -1092,7 +1095,7 @@ for k in range(1,7):
     m = 2**k
     A = HomeworkMatrix(m)
     b = [1 for w in range(A.rows)]
-    data.append( ConjugateGradient2( A, b, lo=2, hi=2)['times'] )
+    data.append( ConjugateGradient2( A, b, naught=[b for b in A.cols])['times'] )
 
 
 
