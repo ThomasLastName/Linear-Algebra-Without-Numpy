@@ -1047,7 +1047,7 @@ from numpy.linalg import norm as norm
 from numpy import matmul as mul
 
 
-def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=0):
+def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=0, max_iter=20000):
     #
     #   preamble
     #
@@ -1065,7 +1065,7 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
     #   iterate
     #
     k = 0
-    while (k<20000 and Measure>tol*max(x.max(),x.min())):
+    while (k<max_iter and Measure>tol*max(x.max(),x.min())):
         Av = mul(A,v)
         modv = mul(v.T,Av)[0][0]
         alpha = float(modr)/modv
@@ -1095,7 +1095,7 @@ for k in range(1,7):
     m = 2**k
     A = HomeworkMatrix(m)
     b = [1 for w in range(A.rows)]
-    data.append( ConjugateGradient2( A, b, naught=[b for b in A.cols])['times'] )
+    data.append( ConjugateGradient2( A, b, naught=[b for b in range(A.cols)])['times'] )
 
 
 
