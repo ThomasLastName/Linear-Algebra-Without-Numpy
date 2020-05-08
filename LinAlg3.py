@@ -1086,7 +1086,7 @@ data = []
 for k in range(1,7):
     print('')
     print('')
-    print('Working on m='+str(k) + '.')
+    print('Working on k='+str(k) + '.')
     print('')
     print('')
     m = 2**k
