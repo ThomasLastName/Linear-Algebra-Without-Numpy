@@ -1054,8 +1054,8 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
     #
     if naught is None:
         naught = [uniform(lo,hi) for w in range(len(b))]
-    if isinstance(A, Matrix):                   # only for compatability with the above, otherwise can be omitted
-        A = arr(A.body, dtype=dt)
+#    if isinstance(A, Matrix):                   # only for compatability with the above, otherwise can be omitted
+#        A = arr(A.body, dtype=dt)
     A = A.astype(dt)
     x = arr([naught], dtype=dt).T
     b = arr([b], dtype=dt).T
@@ -1090,14 +1090,14 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
 data = []
 for k in range(1,7):
     print('')
-    print('')
-    print('Working on k='+str(k) + '.')
-    print('')
+    print('    Working on k='+str(k) + '.')
+    print('    Now generating the test matrix.')
     print('')
     m = 2**k
-    A = HomeworkMatrix(m)
+    print(
+    A = arr(HomeworkMatrix(m).body, dtype=float64)
     b = [1 for w in range(A.rows)]
-    data.append( ConjugateGradient2( A, b, naught=[1 for w in range(A.cols)])['times'] )
+    data.append( ConjugateGradient2( A, b, naught=[1 for w in range(len(b))])['times'] )
 
 
 
