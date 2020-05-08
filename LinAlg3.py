@@ -1053,12 +1053,12 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
     #
     if naught is None:
         naught = [uniform(lo,hi) for w in range(len(b))]
-    if isinstance(A, Matrix):       # optional
-        A = arr(A.body)             # optional
-    x = arr([naught]).T
-    b = arr([b]).T
+    if isinstance(A, Matrix):                   # only for compatability with the above
+        A = arr(A.body, dtype=float64)
+    x = arr([naught], dtype=float64).T
+    b = arr([b], dtype=float64).T
     r = b - mul(A,x)
-    v = arr([ j for j in r ])
+    v = arr([ j for j in r ], dtype=float64)
     Measure = norm((mul(A,x)-b).T[0], ord=inf)
     modr = mul(r.T,r)[0][0]
     #
