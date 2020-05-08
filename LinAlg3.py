@@ -1094,10 +1094,11 @@ for k in range(1,7):
     print('    Now generating the test matrix.')
     print('')
     m = 2**k
-    print(
-    A = arr(HomeworkMatrix(m).body, dtype=float64)
+    A = HomeworkMatrix(m)
     b = [1 for w in range(A.rows)]
-    data.append( ConjugateGradient2( A, b, naught=[1 for w in range(len(b))])['times'] )
+    A = arr(A.body, dtype=float64)
+    naught = [1 for w in range(len(b))]
+    data.append( ConjugateGradient2( A, b, naught)['times'] )
 
 
 
