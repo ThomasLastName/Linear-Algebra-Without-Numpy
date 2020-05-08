@@ -1050,8 +1050,8 @@ from numpy import matmul as mul
 def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=0):
     if naught is None:
         naught = [uniform(lo,hi) for w in range(len(b))]
-    if isinstance(A, Matrix):
-        A = arr(A.body)
+#    if isinstance(A, Matrix):       # optional
+#        A = arr(A.body)             # optional
     x = arr([naught]).T
     b = arr([b]).T
     r = b - mul(A,x)
