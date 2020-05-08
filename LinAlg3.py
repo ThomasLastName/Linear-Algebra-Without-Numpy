@@ -1082,6 +1082,7 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
     return {'soln' : x, 'times' : k}
 
 
+data = []
 for k in range(1,7):
     print('')
     print('')
