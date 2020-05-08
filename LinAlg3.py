@@ -1045,20 +1045,21 @@ from numpy import array as arr
 from numpy import inf as inf
 from numpy.linalg import norm as norm
 from numpy import matmul as mul
+from numpy import float64
 
 
-def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=0, max_iter=20000):
+def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=0, max_iter=20000, dt=float64):
     #
     #   preamble
     #
     if naught is None:
         naught = [uniform(lo,hi) for w in range(len(b))]
     if isinstance(A, Matrix):                   # only for compatability with the above
-        A = arr(A.body, dtype=float64)
-    x = arr([naught], dtype=float64).T
-    b = arr([b], dtype=float64).T
+        A = arr(A.body, dtype=dt)
+    x = arr([naught], dtype=dt).T
+    b = arr([b], dtype=dt).T
     r = b - mul(A,x)
-    v = arr([ j for j in r ], dtype=float64)
+    v = arr([ j for j in r ], dtype=dt)
     Measure = norm((mul(A,x)-b).T[0], ord=inf)
     modr = mul(r.T,r)[0][0]
     #
@@ -1071,7 +1072,7 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
         alpha = float(modr)/modv
         x += alpha*v
         r -= alpha*Av
-        modv = modr                         # a dumb attempt to conserve RAM
+        modv = modr
         modr = mul(r.T,r)[0][0]             # ||b-alphaAv||^2, not ||residual||^2
         alpha = float(modr)/modv            # ||new.r||^2 / ||old.r||^2
         v = r + alpha*v
