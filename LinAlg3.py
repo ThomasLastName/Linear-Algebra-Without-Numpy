@@ -1047,8 +1047,9 @@ from numpy.linalg import norm as norm
 from numpy import matmul as mul
 
 
-def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=0, check=False):
-    naught = [uniform(lo,hi) for w in range(len(b))]
+def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=0):
+    if naught is None:
+        naught = [uniform(lo,hi) for w in range(len(b))]
     if isinstance(A, Matrix):
         A = arr(A.body)
     x = arr([naught]).T
@@ -1061,7 +1062,7 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
     #   iterate
     #
     k = 0
-    while (k<20000 and Measure>tol*MaxAbs(x)):
+    while (k<20000 and Measure>tol*max(x.max(),x.min()):
         Av = mul(A,v)
         modv = mul(v.T,Av)[0][0]
         alpha = float(modr)/modv
