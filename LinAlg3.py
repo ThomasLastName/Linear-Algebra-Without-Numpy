@@ -1085,7 +1085,7 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
 for k in range(1,7):
     print('')
     print('')
-    print('Working on m='+str(m) + '.')
+    print('Working on m='+str(k) + '.')
     print('')
     print('')
     m = 2**k
