@@ -1062,7 +1062,7 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
     #   iterate
     #
     k = 0
-    while (k<20000 and Measure>tol*max(x.max(),x.min()):
+    while (k<20000 and Measure>tol*max(x.max(),x.min())):
         Av = mul(A,v)
         modv = mul(v.T,Av)[0][0]
         alpha = float(modr)/modv
