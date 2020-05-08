@@ -1054,8 +1054,9 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
     #
     if naught is None:
         naught = [uniform(lo,hi) for w in range(len(b))]
-    if isinstance(A, Matrix):                   # only for compatability with the above
+    if isinstance(A, Matrix):                   # only for compatability with the above, otherwise can be omitted
         A = arr(A.body, dtype=dt)
+    A = A.astype(dt)
     x = arr([naught], dtype=dt).T
     b = arr([b], dtype=dt).T
     r = b - mul(A,x)
