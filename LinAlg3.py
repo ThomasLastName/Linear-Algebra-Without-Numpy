@@ -1057,9 +1057,9 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
 #    if isinstance(A, Matrix):                   # only for compatability with the above, otherwise can be omitted
 #        A = arr(A.body, dtype=dt)
     A = A.astype(dt)
-    x = arr([naught], dtype=dt).T
+    x = arr([naught], dtype=dt).T               # convert list into numpy column vector
     b = arr([b], dtype=dt).T
-    r = b - mul(A,x)
+    r = b - mul(A,x)                            # resideual
     v = arr([ j for j in r ], dtype=dt)
     Measure = norm((mul(A,x)-b).T[0], ord=inf)
     modr = mul(r.T,r)[0][0]
@@ -1069,13 +1069,13 @@ def ConjugateGradient2(A, b, naught=None, ShowProgress=True, tol=1e-8, lo=0, hi=
     k = 0
     while (k<max_iter and Measure>tol*max(x.max(),x.min())):
         Av = mul(A,v)
-        modv = mul(v.T,Av)[0][0]
+        modv = mul(v.T,Av)[0][0]            # modulus (aka. norm) of v w.r.t. the inner product (x,y):=x^TAy (this is an inner prod when A is symmetric)
         alpha = float(modr)/modv
         x += alpha*v
         r -= alpha*Av
-        modv = modr
+        mod_old_r = modr
         modr = mul(r.T,r)[0][0]             # ||b-alphaAv||^2, not ||residual||^2
-        alpha = float(modr)/modv            # ||new.r||^2 / ||old.r||^2
+        alpha = float(modr)/mod_old_r       # ||new.r||^2 / ||old.r||^2
         v = r + alpha*v
         k += 1
         Measure = norm((mul(A,x)-b).T[0], ord=inf)
